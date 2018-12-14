@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title','Laravel - Users')
+
 @section('content')
     <h2>USERS</h2>
 
@@ -13,7 +15,7 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Actions</th>
+            <th scope="col" colspan="2">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -23,23 +25,17 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>
-                    <a href="#" class="btn btn-primary">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="{{route('users.edit', ['id' => $user->id])}}" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <form action="{{route('users.delete', ['id' => $user->id])}}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-    <ul>
-        @foreach($users as $user)
-            <li> {{ $user->name }}
-
-                <form action="{{route('users.delete', ['id' => $user->id])}}" method="POST">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </li>
-        @endforeach
-    </ul>
 @endsection

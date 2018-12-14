@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
+        <h1>Laravel home page</h1>
         <p class="lead">
             This is my first laravel project!!!
         </p>

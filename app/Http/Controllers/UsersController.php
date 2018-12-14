@@ -30,7 +30,7 @@ class UsersController extends Controller
 
         $user->save();
 
-        return redirect()->route('home');
+        return redirect()->route('users.index');
     }
 
     public function edit($id)
@@ -50,14 +50,14 @@ class UsersController extends Controller
 
 //        User::update($id, ['name' => request('name')]);
 
-        return redirect()->route('users.edit', ['id' => $user->id]);
+        return redirect()->route('users.index');
     }
 
     public function delete($id)
     {
         User::query()->where('id', $id)->delete();
 
-        return redirect()->route('home');
+        return redirect()->route('users.index');
     }
 }
 
