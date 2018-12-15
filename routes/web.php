@@ -19,3 +19,5 @@ Route::post('/users/store', 'UsersController@store')->name('users.store');
 Route::delete('/users/{id}', 'UsersController@delete')->name('users.delete');
 Route::get('/users/{id}', 'UsersController@edit')->name('users.edit');
 Route::post('/users/{id}', 'UsersController@update')->name('users.update');
+
+Route::resource('project', 'ProjectController');
