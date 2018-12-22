@@ -12,4 +12,14 @@
                value="{{$project->description}}"
                aria-label="Recipient's username" aria-describedby="button-addon2">
     </div>
+
+    <div>
+        @foreach($project->tasks as $task)
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="taskCheckbox">
+                <label class="form-check-label" for="exampleCheck1">{{$task->description}}</label>
+            </div>
+        @endforeach
+
+    </div>
 @endsection
