@@ -21,3 +21,5 @@ Route::get('/users/{id}', 'UsersController@edit')->name('users.edit');
 Route::post('/users/{id}', 'UsersController@update')->name('users.update');
 
 Route::resource('project', 'ProjectController');
+
+Route::patch('/tasks/{task}', 'ProjectTaskController@update')->name('tasks.complete');

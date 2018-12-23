@@ -15,10 +15,24 @@
 
     <div>
         @foreach($project->tasks as $task)
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="taskCheckbox">
-                <label class="form-check-label" for="exampleCheck1">{{$task->description}}</label>
-            </div>
+            <form action="{{route('tasks.complete', ['task'=>$task->id])}}" method="POST">
+                @method('PATCH')
+                @csrf
+
+                <div class="custom-control custom-checkbox">
+                    <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customCheck1{{$task->id}}"
+                            onChange="this.form.submit()"
+                            name="completed"
+                            @if($task->completed) checked @endif
+                    >
+                    <label class="custom-control-label" for="customCheck1{{$task->id}}">{{$task->description}}</label>
+                </div>
+
+            </form>
+
         @endforeach
 
     </div>
