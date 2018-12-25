@@ -8,14 +8,12 @@
     @csrf
 
     <div class="input-group mb-3">
-        <input type="text" class="form-control" name="title" placeholder="Enter new name"
-               value="{{$project->description}}"
-               aria-label="Recipient's username" aria-describedby="button-addon2">
+        {{$project->description}}
     </div>
 
-    <div>
+    <div class="box">
         @foreach($project->tasks as $task)
-            <form action="{{route('tasks.complete', ['task'=>$task->id])}}" method="POST">
+            <form class="form-group" action="{{route('tasks.complete', ['task'=>$task->id])}}" method="POST">
                 @method('PATCH')
                 @csrf
 
@@ -27,8 +25,10 @@
                             onChange="this.form.submit()"
                             name="completed"
                             @if($task->completed) checked @endif
+                            required
                     >
-                    <label class="custom-control-label" for="customCheck1{{$task->id}}">{{$task->description}}</label>
+                    <label class="custom-control-label {{$task->completed ? 'is-completed' : ''}}"
+                           for="customCheck1{{$task->id}}">{{$task->description}}</label>
                 </div>
 
             </form>
@@ -36,4 +36,20 @@
         @endforeach
 
     </div>
+
+    <form class="box" action="{{route('tasks.store', ['project' => $project->id])}}" method="POST">
+        @csrf
+        <div class="was-validated">
+            <label class="label" for="description"><h4>ADD new Task</h4></label>
+            <div class="control">
+                <input type="text" class="form-control" name="description" placeholder="Task name"
+                       aria-describedby="title" {{old('description')}} required>
+            </div>
+            @include('project.partials.errors')
+            <div style="padding-top: 10px">
+                <button class="btn btn-success" type="submit">Add new Task</button>
+            </div>
+        </div>
+    </form>
+
 @endsection

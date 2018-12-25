@@ -42,7 +42,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $params = $request->validate([
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|min:2',
             'description' => 'required'
         ]);
 

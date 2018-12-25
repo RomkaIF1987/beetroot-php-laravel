@@ -7,6 +7,6 @@
     <form action="{{route('project.store')}}" method="POST">
         @include('project.partials.form')
 
-        <input type="submit" class="btn btn-secondary btn-lg" value="Create new project">
+        <input type="submit" class="btn btn-success btn-lg" value="Create new project">
     </form>
 @endsection

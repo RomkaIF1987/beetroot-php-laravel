@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -22,4 +23,24 @@ class ProjectTaskController extends Controller
 
         return redirect()->route('project.show', ['project' => $task->project->id]);
     }
+
+//    public function store(Project $project, Request $request)
+//    {
+//        Task::create([
+//            'project_id' => $project->id,
+//            'description' => $request->get('description')
+//        ]);
+//        return back();
+//    }
+
+
+    public function store(Project $project, Request $request)
+    {
+        $param = $request->validate(['description' => 'required|max:255|min:3']);
+
+        $project->addTask($param['description']);
+
+        return back();
+    }
 }
+
