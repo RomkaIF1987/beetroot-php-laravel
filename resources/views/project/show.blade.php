@@ -5,6 +5,7 @@
 @endsection
 @section('content')
     <h2>Project - {{$project->title}}</h2>
+    <h4> This project belongs to the user {{$project->user->name}}</h4>
     @csrf
 
     <div class="input-group mb-3">
@@ -13,9 +14,11 @@
 
     <div class="box">
         @foreach($project->tasks as $task)
-            <form class="form-group" action="{{route('tasks.complete', ['task'=>$task->id])}}" method="POST">
-                @method('PATCH')
+            <form class="form-group" action="/completed-task/{{$task->id}}" method="POST">
                 @csrf
+                @if($task->completed)
+                    @method('DELETE')
+                @endif
 
                 <div class="custom-control custom-checkbox">
                     <input
@@ -30,7 +33,6 @@
                     <label class="custom-control-label {{$task->completed ? 'is-completed' : ''}}"
                            for="customCheck1{{$task->id}}">{{$task->description}}</label>
                 </div>
-
             </form>
 
         @endforeach

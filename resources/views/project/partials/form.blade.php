@@ -27,3 +27,11 @@
         </div>
     @endif
 </div>
+<div class="form-group col-md-4">
+    <label for="user_id">Responsible for the project</label>
+    <select id="user_id" name="user_id" class="form-control" {{$errors->has('user_id') ? 'is-invalid' : ''}}>
+        @foreach($users as $user)
+            <option value="{{$user->id}}" {{$project->user_id == $user->id ? 'selected' : ''}}>{{$user->name}}</option>
+        @endforeach
+    </select>
+</div>

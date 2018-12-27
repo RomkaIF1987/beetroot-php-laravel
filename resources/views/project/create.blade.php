@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Create User')
+@section('title','Create Project')
 
 @section('content')
     <h2>CREATE PROJECT</h2>
@@ -9,4 +9,5 @@
 
         <input type="submit" class="btn btn-success btn-lg" value="Create new project">
     </form>
+
 @endsection

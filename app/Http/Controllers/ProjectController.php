@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -29,7 +30,8 @@ class ProjectController extends Controller
     public function create()
     {
         return view('project.create', [
-            'project' => new Project()
+            'project' => new Project(),
+            'users' => User::all()
         ]);
     }
 
@@ -43,7 +45,8 @@ class ProjectController extends Controller
     {
         $params = $request->validate([
             'title' => 'required|max:255|min:2',
-            'description' => 'required'
+            'description' => 'required',
+            'user_id' => 'required|exists:users,id'
         ]);
 
         $project = Project::create($params);
@@ -70,7 +73,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('project.edit', ['project' => $project]);
+        return view('project.edit', [
+            'project' => $project,
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -84,7 +90,8 @@ class ProjectController extends Controller
     {
         $params = $request->validate([
             'title' => 'required|max:255',
-            'description' => 'required'
+            'description' => 'required',
+            'user_id' => 'required|exists:users,id'
         ]);
 
         $project->update($params);
