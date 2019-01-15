@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewProjectMail;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -50,6 +51,10 @@ class ProjectController extends Controller
         $params['user_id'] = auth()->id();
 
         $project = Project::create($params);
+
+        \Mail::to('roman@i.ua')->send(
+            new NewProjectMail($project)
+        );
 
         return redirect()->route('project.show', ['project' => $project->id]);
     }
