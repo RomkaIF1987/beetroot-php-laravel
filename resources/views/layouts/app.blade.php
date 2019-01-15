@@ -15,7 +15,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="/">Home</a>
+    <a class="navbar-brand" href="{{route('home')}}">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -26,22 +26,23 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('users.index')}}"> Users <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{route('project.index')}}"> Projects <span
-                            class="sr-only">(current)</span></a>
-            </li>
-
+            @auth
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{route('project.index')}}"> Projects <span
+                                class="sr-only">(current)</span></a>
+                </li>
+            @endauth
             @guest
-                <li class="nav-item">
+                <li class="nav-item" style="float:right">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
                 @if (Route::has('register'))
-                    <li class="nav-item">
+                    <li class="nav-item" style="float:right">
                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     </li>
                 @endif
             @else
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" style="float:right">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }} <span class="caret"></span>
